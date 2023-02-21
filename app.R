@@ -93,7 +93,7 @@ server <- function(input, output) {
                
                output$finalcsv <- renderTable({
                  total <- csv_process(global$completed_path,"hi","hi3.csv")
-                 return(total)
+                 return(head(total))
                })
                
                # output$downloadData <- downloadHandler(
@@ -130,31 +130,6 @@ server <- function(input, output) {
     return(df)
     
   })
-  
-  output$table <- renderTable({
-    
-    # input$file1 will be NULL initially. After the user selects
-    # and uploads a file, head of that data file by default,
-    # or all rows if selected, will be shown.
-    
-    req(input$file1)
-    
-    df <- read.csv(input$file1$datapath,
-                   header = input$header,
-                   sep = input$sep,
-                   quote = input$quote)
-    
-    if(input$disp == "head") {
-      return(head(df))
-    }
-    else {
-      return(df)
-    }
-    
-  })
-  
-  
-  
 }
 
 # Create Shiny app ----
